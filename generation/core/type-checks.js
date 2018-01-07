@@ -47,7 +47,10 @@ const isOfClass = className => ({ name }) =>
 		typeof ARG.constructor !== 'function' ||
 		ARG.constructor.name !== '${className}'
 	) {
-		throw new Error('${name} should be an instance of ${className}, got "' + ARG + '"');
+		const isObject = typeof ARG === 'object';
+		const additionalErrorInfo = isObject ? (typeof ARG.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + ARG.constructor.name +'"') : 'it is no object';
+
+		throw new Error('${name} should be an instance of ${className}, got "' + ARG + '", it appears that ' + additionalErrorInfo);
 	}
 	`)({
 		ARG: t.identifier(name)
