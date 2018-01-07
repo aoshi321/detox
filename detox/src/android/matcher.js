@@ -17,9 +17,8 @@ class Matcher {
     return this;
   }
   and(matcher) {
-    if (!(matcher instanceof Matcher)) throw new Error(`Matcher and argument must be a valid Matcher, got ${typeof matcher}`);
-    const _originalMatcherCall = this._call;
-    this._call = invoke.call(invoke.Android.Class(DetoxMatcher), 'matcherForAnd', _originalMatcherCall, matcher._call);
+    this._call = invoke.callDirectly(DetoxMatcherApi.matcherForAnd(this, matcher));
+
     return this;
   }
   or(matcher) {

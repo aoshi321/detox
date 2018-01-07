@@ -37,3 +37,5 @@ Object {
   },
 }
 `;
+
+exports[`Android generation validation Matcher<View> should fail with the wrong class 1`] = `"m1 should be an instance of Matcher, got \\"I am a string\\""`;
