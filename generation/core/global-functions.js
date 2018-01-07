@@ -136,10 +136,15 @@ function sanitize_uiAccessibilityTraits(value) {
 	return traits;
 } // END sanitize_uiAccessibilityTraits
 
+function sanitize_matcher(matcher) {
+	return matcher._call;
+} // END sanitize_matcher
+
 module.exports = {
 	sanitize_greyDirection,
 	sanitize_greyContentEdge,
 	sanitize_uiAccessibilityTraits,
 	sanitize_android_direction,
-	sanitize_android_edge
+	sanitize_android_edge,
+	sanitize_matcher
 };

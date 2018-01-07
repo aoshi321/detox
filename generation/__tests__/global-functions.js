@@ -103,4 +103,11 @@ describe("globals", () => {
 			).toThrowErrorMatchingSnapshot();
 		});
 	});
+
+	describe("sanitize_matcher", () => {
+		it("should return the ._call property instead", () => {
+			const matcherLikeObj = { _call: "I am a call" };
+			expect(globals.sanitize_matcher(matcherLikeObj)).toBe("I am a call");
+		});
+	});
 });

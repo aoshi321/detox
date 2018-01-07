@@ -44,8 +44,8 @@ const isOfClass = className => ({ name }) =>
 	template(`
 	if (
 		typeof ARG !== 'object' ||
-		typeof ARG.constructor !== 'object' ||
-		ARG.constructor.name !== ${className}
+		typeof ARG.constructor !== 'function' ||
+		ARG.constructor.name !== '${className}'
 	) {
 		throw new Error('${name} should be an instance of ${className}, got "' + ARG + '"');
 	}

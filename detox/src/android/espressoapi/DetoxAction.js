@@ -87,25 +87,6 @@ class DetoxAction {
     };
   }
 
-  static scrollInDirection(direction, amountInDP) {
-    if (typeof direction !== "string") throw new Error("direction should be a string, but got " + (direction + (" (" + (typeof direction + ")"))));
-    if (typeof amountInDP !== "number") throw new Error("amountInDP should be a number, but got " + (amountInDP + (" (" + (typeof amountInDP + ")"))));
-    return {
-      target: {
-        type: "Class",
-        value: "com.wix.detox.espresso.DetoxAction"
-      },
-      method: "scrollInDirection",
-      args: [{
-        type: "Integer",
-        value: sanitize_android_direction(direction)
-      }, {
-        type: "Double",
-        value: amountInDP
-      }]
-    };
-  }
-
   static swipeInDirection(direction, fast) {
     if (typeof direction !== "string") throw new Error("direction should be a string, but got " + (direction + (" (" + (typeof direction + ")"))));
     if (typeof fast !== "boolean") throw new Error("fast should be a boolean, but got " + (fast + (" (" + (typeof fast + ")"))));
