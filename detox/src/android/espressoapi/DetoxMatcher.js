@@ -5,7 +5,9 @@
 */
 
 
-
+function sanitize_matcher(matcher) {
+	return matcher._call;
+} 
 class DetoxMatcher {
   static matcherForText(text) {
     if (typeof text !== "string") throw new Error("text should be a string, but got " + (text + (" (" + (typeof text + ")"))));
@@ -54,11 +56,15 @@ class DetoxMatcher {
 
   static matcherForAnd(m1, m2) {
     if (typeof m1 !== 'object' || typeof m1.constructor !== 'function' || m1.constructor.name !== 'Matcher') {
-      throw new Error('m1 should be an instance of Matcher, got "' + m1 + '"');
+      const isObject = typeof m1 === 'object';
+      const additionalErrorInfo = isObject ? typeof m1.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + m1.constructor.name + '"' : 'it is no object';
+      throw new Error('m1 should be an instance of Matcher, got "' + m1 + '", it appears that ' + additionalErrorInfo);
     }
 
     if (typeof m2 !== 'object' || typeof m2.constructor !== 'function' || m2.constructor.name !== 'Matcher') {
-      throw new Error('m2 should be an instance of Matcher, got "' + m2 + '"');
+      const isObject = typeof m2 === 'object';
+      const additionalErrorInfo = isObject ? typeof m2.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + m2.constructor.name + '"' : 'it is no object';
+      throw new Error('m2 should be an instance of Matcher, got "' + m2 + '", it appears that ' + additionalErrorInfo);
     }
 
     return {
@@ -68,22 +74,26 @@ class DetoxMatcher {
       },
       method: "matcherForAnd",
       args: [{
-        type: "Matcher<View>",
-        value: m1
+        type: "String",
+        value: sanitize_matcher(m1)
       }, {
-        type: "Matcher<View>",
-        value: m2
+        type: "String",
+        value: sanitize_matcher(m2)
       }]
     };
   }
 
   static matcherForOr(m1, m2) {
     if (typeof m1 !== 'object' || typeof m1.constructor !== 'function' || m1.constructor.name !== 'Matcher') {
-      throw new Error('m1 should be an instance of Matcher, got "' + m1 + '"');
+      const isObject = typeof m1 === 'object';
+      const additionalErrorInfo = isObject ? typeof m1.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + m1.constructor.name + '"' : 'it is no object';
+      throw new Error('m1 should be an instance of Matcher, got "' + m1 + '", it appears that ' + additionalErrorInfo);
     }
 
     if (typeof m2 !== 'object' || typeof m2.constructor !== 'function' || m2.constructor.name !== 'Matcher') {
-      throw new Error('m2 should be an instance of Matcher, got "' + m2 + '"');
+      const isObject = typeof m2 === 'object';
+      const additionalErrorInfo = isObject ? typeof m2.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + m2.constructor.name + '"' : 'it is no object';
+      throw new Error('m2 should be an instance of Matcher, got "' + m2 + '", it appears that ' + additionalErrorInfo);
     }
 
     return {
@@ -93,18 +103,20 @@ class DetoxMatcher {
       },
       method: "matcherForOr",
       args: [{
-        type: "Matcher<View>",
-        value: m1
+        type: "String",
+        value: sanitize_matcher(m1)
       }, {
-        type: "Matcher<View>",
-        value: m2
+        type: "String",
+        value: sanitize_matcher(m2)
       }]
     };
   }
 
   static matcherForNot(m) {
     if (typeof m !== 'object' || typeof m.constructor !== 'function' || m.constructor.name !== 'Matcher') {
-      throw new Error('m should be an instance of Matcher, got "' + m + '"');
+      const isObject = typeof m === 'object';
+      const additionalErrorInfo = isObject ? typeof m.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + m.constructor.name + '"' : 'it is no object';
+      throw new Error('m should be an instance of Matcher, got "' + m + '", it appears that ' + additionalErrorInfo);
     }
 
     return {
@@ -114,19 +126,23 @@ class DetoxMatcher {
       },
       method: "matcherForNot",
       args: [{
-        type: "Matcher<View>",
-        value: m
+        type: "String",
+        value: sanitize_matcher(m)
       }]
     };
   }
 
   static matcherWithAncestor(m, ancestorMatcher) {
     if (typeof m !== 'object' || typeof m.constructor !== 'function' || m.constructor.name !== 'Matcher') {
-      throw new Error('m should be an instance of Matcher, got "' + m + '"');
+      const isObject = typeof m === 'object';
+      const additionalErrorInfo = isObject ? typeof m.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + m.constructor.name + '"' : 'it is no object';
+      throw new Error('m should be an instance of Matcher, got "' + m + '", it appears that ' + additionalErrorInfo);
     }
 
     if (typeof ancestorMatcher !== 'object' || typeof ancestorMatcher.constructor !== 'function' || ancestorMatcher.constructor.name !== 'Matcher') {
-      throw new Error('ancestorMatcher should be an instance of Matcher, got "' + ancestorMatcher + '"');
+      const isObject = typeof ancestorMatcher === 'object';
+      const additionalErrorInfo = isObject ? typeof ancestorMatcher.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + ancestorMatcher.constructor.name + '"' : 'it is no object';
+      throw new Error('ancestorMatcher should be an instance of Matcher, got "' + ancestorMatcher + '", it appears that ' + additionalErrorInfo);
     }
 
     return {
@@ -136,22 +152,26 @@ class DetoxMatcher {
       },
       method: "matcherWithAncestor",
       args: [{
-        type: "Matcher<View>",
-        value: m
+        type: "String",
+        value: sanitize_matcher(m)
       }, {
-        type: "Matcher<View>",
-        value: ancestorMatcher
+        type: "String",
+        value: sanitize_matcher(ancestorMatcher)
       }]
     };
   }
 
   static matcherWithDescendant(m, descendantMatcher) {
     if (typeof m !== 'object' || typeof m.constructor !== 'function' || m.constructor.name !== 'Matcher') {
-      throw new Error('m should be an instance of Matcher, got "' + m + '"');
+      const isObject = typeof m === 'object';
+      const additionalErrorInfo = isObject ? typeof m.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + m.constructor.name + '"' : 'it is no object';
+      throw new Error('m should be an instance of Matcher, got "' + m + '", it appears that ' + additionalErrorInfo);
     }
 
     if (typeof descendantMatcher !== 'object' || typeof descendantMatcher.constructor !== 'function' || descendantMatcher.constructor.name !== 'Matcher') {
-      throw new Error('descendantMatcher should be an instance of Matcher, got "' + descendantMatcher + '"');
+      const isObject = typeof descendantMatcher === 'object';
+      const additionalErrorInfo = isObject ? typeof descendantMatcher.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + descendantMatcher.constructor.name + '"' : 'it is no object';
+      throw new Error('descendantMatcher should be an instance of Matcher, got "' + descendantMatcher + '", it appears that ' + additionalErrorInfo);
     }
 
     return {
@@ -161,11 +181,11 @@ class DetoxMatcher {
       },
       method: "matcherWithDescendant",
       args: [{
-        type: "Matcher<View>",
-        value: m
+        type: "String",
+        value: sanitize_matcher(m)
       }, {
-        type: "Matcher<View>",
-        value: descendantMatcher
+        type: "String",
+        value: sanitize_matcher(descendantMatcher)
       }]
     };
   }
@@ -233,7 +253,9 @@ class DetoxMatcher {
     if (typeof index !== "number") throw new Error("index should be a number, but got " + (index + (" (" + (typeof index + ")"))));
 
     if (typeof innerMatcher !== 'object' || typeof innerMatcher.constructor !== 'function' || innerMatcher.constructor.name !== 'Matcher') {
-      throw new Error('innerMatcher should be an instance of Matcher, got "' + innerMatcher + '"');
+      const isObject = typeof innerMatcher === 'object';
+      const additionalErrorInfo = isObject ? typeof innerMatcher.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + innerMatcher.constructor.name + '"' : 'it is no object';
+      throw new Error('innerMatcher should be an instance of Matcher, got "' + innerMatcher + '", it appears that ' + additionalErrorInfo);
     }
 
     return {
@@ -246,8 +268,8 @@ class DetoxMatcher {
         type: "Integer",
         value: index
       }, {
-        type: "Matcher<View>",
-        value: innerMatcher
+        type: "String",
+        value: sanitize_matcher(innerMatcher)
       }]
     };
   }
