@@ -45,7 +45,7 @@ const isOfClass = className => ({ name }) =>
 	if (
 		typeof ARG !== 'object' ||
 		typeof ARG.constructor !== 'function' ||
-		ARG.constructor.name !== '${className}'
+		ARG.constructor.name.indexOf('${className}') === -1
 	) {
 		const isObject = typeof ARG === 'object';
 		const additionalErrorInfo = isObject ? (typeof ARG.constructor === 'object' ? 'the constructor is no object' : 'it has a wrong class name: "' + ARG.constructor.name +'"') : 'it is no object';
