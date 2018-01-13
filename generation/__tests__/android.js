@@ -84,7 +84,10 @@ describe("Android generation", () => {
 			});
 
 			it("should succeed with the 'right' class", () => {
-				class Matcher {} // stub for matcher class
+				// stub for matcher class
+				class Matcher {
+					_call() {}
+				}
 
 				const m = new Matcher();
 				expect(() => {

@@ -6,7 +6,14 @@
 
 
 function sanitize_matcher(matcher) {
-	return matcher._call;
+	if (typeof matcher._call !== "function") {
+		console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+		console.log(matcher);
+		console.log(matcher._call);
+		console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+	}
+
+	return typeof matcher._call === "function" ? matcher._call() : matcher._call;
 } 
 class DetoxMatcher {
   static matcherForText(text) {
@@ -74,10 +81,10 @@ class DetoxMatcher {
       },
       method: "matcherForAnd",
       args: [{
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(m1)
       }, {
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(m2)
       }]
     };
@@ -103,10 +110,10 @@ class DetoxMatcher {
       },
       method: "matcherForOr",
       args: [{
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(m1)
       }, {
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(m2)
       }]
     };
@@ -126,7 +133,7 @@ class DetoxMatcher {
       },
       method: "matcherForNot",
       args: [{
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(m)
       }]
     };
@@ -152,10 +159,10 @@ class DetoxMatcher {
       },
       method: "matcherWithAncestor",
       args: [{
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(m)
       }, {
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(ancestorMatcher)
       }]
     };
@@ -181,10 +188,10 @@ class DetoxMatcher {
       },
       method: "matcherWithDescendant",
       args: [{
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(m)
       }, {
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(descendantMatcher)
       }]
     };
@@ -268,7 +275,7 @@ class DetoxMatcher {
         type: "Integer",
         value: index
       }, {
-        type: "String",
+        type: "Invocation",
         value: sanitize_matcher(innerMatcher)
       }]
     };

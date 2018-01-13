@@ -137,7 +137,14 @@ function sanitize_uiAccessibilityTraits(value) {
 } // END sanitize_uiAccessibilityTraits
 
 function sanitize_matcher(matcher) {
-	return matcher._call;
+	if (typeof matcher._call !== "function") {
+		console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+		console.log(matcher);
+		console.log(matcher._call);
+		console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+	}
+
+	return typeof matcher._call === "function" ? matcher._call() : matcher._call;
 } // END sanitize_matcher
 
 module.exports = {

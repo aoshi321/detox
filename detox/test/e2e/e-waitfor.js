@@ -4,7 +4,7 @@ describe('WaitFor', () => {
     await element(by.text('WaitFor')).tap();
   });
 
-  it('should wait until an element is created and exists in layout', async () => {
+  it.only('should wait until an element is created and exists in layout', async () => {
     await expect(element(by.id('createdAndVisibleText'))).toNotExist();
     await waitFor(element(by.id('createdAndVisibleText'))).toExist().withTimeout(2000);
     await expect(element(by.id('createdAndVisibleText'))).toExist();
