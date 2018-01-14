@@ -45,7 +45,6 @@ const contentSanitizersForFunction = {
 
 const contentSanitizersForType = {
 	"Matcher<View>": {
-		type: "Invocation",
 		name: "sanitize_matcher",
 		value: callGlobal("sanitize_matcher")
 	}

@@ -13,7 +13,13 @@ class Matcher {
     return this;
   }
   and(matcher) {
-    this._call = invoke.callDirectly(DetoxMatcherApi.matcherForAnd(this, matcher));
+    // this._call = DetoxMatcherApi.matcherForAnd(this, matcher);
+
+    console.log('NEW: ', JSON.stringify(DetoxMatcherApi.matcherForAnd(this, matcher)));
+    if (!(matcher instanceof Matcher)) throw new Error(`Matcher and argument must be a valid Matcher, got ${typeof matcher}`);
+    const _originalMatcherCall = this._call;
+    this._call = invoke.call(invoke.Android.Class(DetoxMatcher), 'matcherForAnd', _originalMatcherCall, matcher._call);
+    console.log('ORIGINAL: ', JSON.stringify(this._call()));
     return this;
   }
   or(matcher) {
