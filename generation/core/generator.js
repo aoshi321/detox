@@ -163,7 +163,7 @@ module.exports = function({
 	}
 
 	// These types need no wrapping with {type: ..., value: }
-	const plainArgumentTypes = ["id<GREYMatcher>", "Matcher<View>"];
+	const plainArgumentTypes = ["id<GREYMatcher>", "Matcher<View>", "String"];
 	function shouldBeWrapped({ type }) {
 		return !plainArgumentTypes.includes(type);
 	}

@@ -17,10 +17,7 @@ class DetoxMatcher {
         value: "com.wix.detox.espresso.DetoxMatcher"
       },
       method: "matcherForText",
-      args: [{
-        type: "String",
-        value: text
-      }]
+      args: [text]
     };
   }
 
@@ -32,10 +29,7 @@ class DetoxMatcher {
         value: "com.wix.detox.espresso.DetoxMatcher"
       },
       method: "matcherForContentDescription",
-      args: [{
-        type: "String",
-        value: contentDescription
-      }]
+      args: [contentDescription]
     };
   }
 
@@ -47,10 +41,7 @@ class DetoxMatcher {
         value: "com.wix.detox.espresso.DetoxMatcher"
       },
       method: "matcherForTestId",
-      args: [{
-        type: "String",
-        value: testId
-      }]
+      args: [testId]
     };
   }
 
@@ -171,10 +162,7 @@ class DetoxMatcher {
         value: "com.wix.detox.espresso.DetoxMatcher"
       },
       method: "matcherForClass",
-      args: [{
-        type: "String",
-        value: className
-      }]
+      args: [className]
     };
   }
 
